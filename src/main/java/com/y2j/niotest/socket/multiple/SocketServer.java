@@ -9,7 +9,7 @@ public class SocketServer {
     public static void main(String[] args) {
         try {
             // 监听指定的端口
-            int port = 55533;
+            int port = 65358;
             ServerSocket server = new ServerSocket(port);
             // server将一直等待连接的到来
             System.out.println("server将一直等待连接的到来");
@@ -25,12 +25,18 @@ public class SocketServer {
                     // 注意指定编码格式，发送方和接收方一定要统一，建议使用UTF-8
                     sb.append(new String(bytes, 0, len, "UTF-8"));
                 }
+                System.out.println("start processing...");
+                Thread.sleep(5000);
                 System.out.println("get message from client: " + sb + "socket=" + socket.toString() + ",remoteIp=" + socket.getInetAddress());
                 System.out.println("Thread=" + Thread.currentThread());
                 inputStream.close();
+                System.out.println("end processing...");
                 socket.close();
+                //socket.shutdownOutput();
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
